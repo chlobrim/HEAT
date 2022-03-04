@@ -1,2 +1,2 @@
 # HEAT
-Repo of code to process and analyse heat and temperature data.
+is a data repository of different R and Python code that was used to analyse heat stress data.
