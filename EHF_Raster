@@ -20,6 +20,6 @@ EHF <- function(Data,Climate){
   Data2 <- calc(Data,fun2)
   EHIsig <- Data - Climate
   EHIaccl <- Data - Data2
-  EHF <- EHIsig * pmax(1, EHIaccl)
-  return(Data)
+  EHF <- EHIsig * max(1,EHIaccl)
+  return(EHF)
 }
