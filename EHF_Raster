@@ -16,10 +16,12 @@ require(raster)
 EHF <- function(Data,Climate){
   fun <- function(x) {mean(x[seq(1,31,by=3)])} #Change 31 to 28,29,30 as appropriate
   fun2 <- function(x) {mean(x)} #if not using month .nc change x to seq(1,nlayers(x),by=31)
+  fun3 <- function(x){max(1,x)}
   Data <- calc(Data,fun)
   Data2 <- calc(Data,fun2)
   EHIsig <- Data - Climate
   EHIaccl <- Data - Data2
-  EHF <- EHIsig * max(1,EHIaccl)
+  EHIaccl <- calc(EHIaccl,fun3)
+  EHF <- EHIsig * EHIaccl
   return(EHF)
 }
