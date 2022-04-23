@@ -1,0 +1,25 @@
+#################################################################################
+# (C) Copyright 2022                                                            #
+#                                                                               #
+# This software is licensed under the terms of the Apache Licence Version 2.0   #
+# which can be obtained at http://www.apache.org/licenses/LICENSE-2.0.          #                                
+#                                                                               #
+# Code By Chloe Brimicombe                                                      #      
+# April 2022                                                                    #                                         
+#################################################################################
+
+require(ncdf4)
+require(raster)
+
+# Function to calculat the EHF (Excess Heat Factor) From Data (https://www.mdpi.com/1660-4601/12/1/227/htm)
+# This is a type of Heat Metric created by John Nairn et al., 
+EHF <- function(Data,Climate){
+  fun <- function(x) {mean(x[seq(1,31,by=3)])} #Change 31 to 28,29,30 as appropriate
+  fun2 <- function(x) {mean(x)} #if not using month .nc change x to seq(1,nlayers(x),by=31)
+  Data <- calc(Data,fun)
+  Data2 <- calc(Data,fun2)
+  EHIsig <- Data - Climate
+  EHIaccl <- Data - Data2
+  EHF <- EHIsig * pmax(1, EHIaccl)
+  return(Data)
+}
