@@ -11,7 +11,7 @@
 require(ncdf4)
 require(raster)
 
-# Function to calculat the EHF (Excess Heat Factor) From Data (https://www.mdpi.com/1660-4601/12/1/227/htm)
+# Function to calculate the EHF (Excess Heat Factor) From Data (https://www.mdpi.com/1660-4601/12/1/227/htm)
 # This is a type of Heat Metric created by John Nairn et al., 
 EHF <- function(Data,Climate){
   fun <- function(x) {mean(x[seq(1,31,by=3)])} #Change 31 to 28,29,30 as appropriate
